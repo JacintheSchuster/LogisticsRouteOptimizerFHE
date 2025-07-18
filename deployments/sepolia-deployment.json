@@ -1,0 +1,11 @@
+{
+  "network": "sepolia",
+  "chainId": "11155111",
+  "contractName": "LogisticsRouteOptimizer",
+  "contractAddress": "0xE235A5C0DbF47ba76db3912c80267F9B43B8d1a8",
+  "deployer": "0x299969b6Ddc4C2319116b2492E618819fA5538eB",
+  "deploymentTransaction": "0x380f156d3be521e1fda1b698ec5f02b79526d9680a95a38ce93ccda6345c122e",
+  "blockNumber": null,
+  "timestamp": "2025-10-23T12:16:00.952Z",
+  "deployTime": "11.32"
+}
