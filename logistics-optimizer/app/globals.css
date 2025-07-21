@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Color System */
+  --color-bg: #070910;
+  --color-bg-alt: #0a0d16;
+  --color-text: #f5f7ff;
+  --color-text-dim: rgba(198, 207, 232, 0.72);
+  --color-panel: rgba(16, 20, 36, 0.92);
+  --color-panel-alt: rgba(20, 24, 42, 0.88);
+  --color-border: rgba(120, 142, 182, 0.22);
+  --color-border-strong: rgba(120, 142, 182, 0.38);
+
+  /* Accent Colors */
+  --accent: #6d6eff;
+  --accent-hover: #5456ff;
+  --accent-soft: rgba(109, 110, 255, 0.16);
+  --accent-border: rgba(109, 110, 255, 0.28);
+
+  /* Status Colors */
+  --success: #2bc37b;
+  --success-soft: rgba(43, 195, 123, 0.16);
+  --warning: #f3b13b;
+  --warning-soft: rgba(243, 177, 59, 0.16);
+  --error: #ef5350;
+  --error-soft: rgba(239, 83, 80, 0.16);
+  --info: #3b82f6;
+  --info-soft: rgba(59, 130, 246, 0.16);
+
+  /* Spacing System (8px base) */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.5rem;   /* 24px */
+  --space-6: 2rem;     /* 32px */
+  --space-8: 4rem;     /* 64px */
+
+  /* Border Radius System */
+  --radius-sm: 0.5rem;   /* 8px */
+  --radius-md: 1.05rem;  /* 16-17px */
+  --radius-lg: 1.35rem;  /* 20-22px */
+  --radius-full: 999px;  /* Pill shape */
+
+  /* Animation System */
+  --transition-quick: 150ms ease-in-out;
+  --transition-default: 180ms cubic-bezier(0.2, 0.9, 0.35, 1);
+  --transition-smooth: 300ms ease-out;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(109, 110, 255, 0.25);
+  --shadow-panel: 0 18px 42px -32px rgba(5, 8, 18, 0.9);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-[#f5f7ff];
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(135deg, #070910 0%, #0d1220 50%, #0a0e1a 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Panel */
+  .glass-panel {
+    background: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: var(--shadow-panel);
+    transition: all var(--transition-default);
+  }
+
+  .glass-panel:hover {
+    border-color: var(--color-border-strong);
+    transform: translateY(-1px);
+  }
+
+  /* Button Styles */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: 0.55rem 1.2rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all var(--transition-default);
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: white;
+    box-shadow: 0 2px 8px rgba(109, 110, 255, 0.2);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-secondary {
+    background: rgba(148, 163, 184, 0.18);
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    color: var(--color-text);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: rgba(148, 163, 184, 0.26);
+    transform: translateY(-1px);
+  }
+
+  .btn-success {
+    background: linear-gradient(135deg, var(--success), #199964);
+    color: white;
+  }
+
+  /* Input Styles */
+  .form-input {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: rgba(10, 13, 22, 0.9);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    transition: all var(--transition-default);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(109, 110, 255, 0.2);
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-dim);
+  }
+
+  /* Label Styles */
+  .form-label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-2);
+    font-weight: 600;
+  }
+
+  /* Badge Styles */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid;
+  }
+
+  .badge-primary {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: rgba(180, 182, 255, 0.95);
+  }
+
+  .badge-success {
+    background: var(--success-soft);
+    border-color: rgba(43, 195, 123, 0.28);
+    color: var(--success);
+  }
+
+  .badge-warning {
+    background: var(--warning-soft);
+    border-color: rgba(243, 177, 59, 0.28);
+    color: var(--warning);
+  }
+
+  .badge-error {
+    background: var(--error-soft);
+    border-color: rgba(239, 83, 80, 0.28);
+    color: var(--error);
+  }
+
+  /* Stat Card */
+  .stat-card {
+    background: var(--color-panel-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    display: grid;
+    gap: 0.55rem;
+    transition: all var(--transition-default);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-border-strong);
+  }
+
+  .stat-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+  }
+
+  .stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  /* Address Display */
+  .address {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    color: var(--accent);
+  }
+
+  /* Loading Spinner */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spinner {
+    animation: spin 0.7s linear infinite;
+  }
+
+  /* Toast Styles */
+  .toast {
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
