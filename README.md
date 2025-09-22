@@ -1,7 +1,7 @@
 # 🚚 Logistics Route Optimizer
 
-[![CI/CD Pipeline](https://github.com/YOUR_USERNAME/logistics-optimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/logistics-optimizer/actions/workflows/ci.yml)
-[![Deploy](https://github.com/YOUR_USERNAME/logistics-optimizer/actions/workflows/deploy.yml/badge.svg)](https://github.com/YOUR_USERNAME/logistics-optimizer/actions/workflows/deploy.yml)
+[![CI/CD Pipeline](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE/actions/workflows/ci.yml/badge.svg)](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE/actions/workflows/ci.yml)
+[![Deploy](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE/actions/workflows/deploy.yml/badge.svg)](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.24-blue.svg)](https://soliditylang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg)](https://nodejs.org/)
@@ -10,9 +10,40 @@
 
 > **Privacy-preserving logistics route optimization using Zama FHEVM - Calculate optimal delivery paths while keeping all location data fully encrypted**
 
-🌐 **[Live Demo](https://logistics-route-optimizer.vercel.app/)** | 📄 **[Documentation](./TECHNICAL.md)** | 🧪 **[Testing Guide](./TESTING.md)** | 🔒 **[Security Guide](./SECURITY_OPTIMIZATION.md)**
+🌐 **[Live Demo](https://logistics-route-optimizer-fhe.vercel.app/)** | 📄 **[Documentation](./TECHNICAL.md)** | 🧪 **[Testing Guide](./TESTING.md)** | 🔒 **[Security Guide](./SECURITY_OPTIMIZATION.md)** | 🎥 **[Video Demo](./demo.mp4)**
+
+**GitHub Repository**: [https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE)
 
 Built for the **Zama FHE Challenge** - demonstrating practical privacy-preserving applications for real-world logistics.
+
+---
+
+## 🎯 Core Concepts
+
+### FHE-Powered Confidential Route Optimization
+
+This platform leverages **Fully Homomorphic Encryption (FHE)** to perform route optimization calculations while keeping all sensitive logistics data encrypted. Delivery coordinates, priorities, vehicle capacities, and optimization results remain confidential throughout the entire computational process.
+
+**Key Innovation**: Calculate Manhattan distances and optimal routes on encrypted data without ever revealing the actual coordinates to anyone - including the contract itself.
+
+### Privacy-Preserving Delivery Path Planning
+
+Traditional route optimization systems expose sensitive business information such as customer locations, delivery priorities, and operational patterns. Our solution ensures that:
+
+- **Delivery Coordinates Remain Encrypted** - Start and end locations (X, Y coordinates) stay encrypted during optimization
+- **Route Priorities Are Confidential** - Priority levels (1-5) processed on encrypted data
+- **Vehicle Capacity Hidden** - Constraints and limitations kept private
+- **Optimized Routes Returned Encrypted** - Results maintained in encrypted form for authorized access only
+- **Manhattan Distance Calculated Homomorphically** - Distance computation without decryption
+
+**Privacy Model**:
+```
+User Input (Plain) → Encrypt Client-Side → Smart Contract (Encrypted)
+                                                ↓
+                                    FHE Operations (Encrypted)
+                                                ↓
+                                    Results (Encrypted) → Decrypt (Authorized Only)
+```
 
 ---
 
@@ -76,17 +107,17 @@ npm --version
 ### Installation
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/YOUR_USERNAME/logistics-optimizer.git
-cd logistics-optimizer
+# Clone repository
+git clone https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE.git
+cd LogisticsRouteOptimizerFHE
 
-# 2. Install dependencies
+# Install dependencies
 npm install --legacy-peer-deps
 
-# 3. Set up environment
+# Set up environment
 cp .env.example .env
 
-# 4. Configure .env with your keys
+# Configure .env with your keys
 # - PRIVATE_KEY (deployer wallet without 0x prefix)
 # - SEPOLIA_RPC_URL (Infura or Alchemy)
 # - ETHERSCAN_API_KEY (for verification)
@@ -127,7 +158,7 @@ npm run interact:sepolia
 # Start development server
 npm run dev
 
-# Open http://localhost:3000
+# Application will be available at http://localhost:3000
 ```
 
 ---
@@ -251,7 +282,7 @@ import { createInstance } from 'fhevmjs';
 
 // Connect to contract
 const contract = new ethers.Contract(
-  '0xE235A5C0DbF47ba76db3912c80267F9B43B8d1a8',
+  '0x1AACA0ce21752dE30E0EB927169084b84d290B87',
   abi,
   signer
 );
@@ -372,20 +403,33 @@ See **[TESTING.md](./TESTING.md)** for detailed testing documentation.
 ## 🌐 Live Demo
 
 **Network**: Sepolia Testnet (Chain ID: 11155111)
-**Contract Address**: `0xE235A5C0DbF47ba76db3912c80267F9B43B8d1a8`
-**Deployment**: 2025-10-23
-**Frontend**: [https://logistics-route-optimizer.vercel.app/](https://logistics-route-optimizer.vercel.app/)
+**Contract Address**: `0x1AACA0ce21752dE30E0EB927169084b84d290B87`
+**Deployment**: 2025-10-24
+**Frontend**: [https://logistics-route-optimizer-fhe.vercel.app/](https://logistics-route-optimizer-fhe.vercel.app/)
 
 **Etherscan Links:**
-- 🔗 [Contract](https://sepolia.etherscan.io/address/0xE235A5C0DbF47ba76db3912c80267F9B43B8d1a8)
-- 📄 [Deployment Tx](https://sepolia.etherscan.io/tx/0x380f156d3be521e1fda1b698ec5f02b79526d9680a95a38ce93ccda6345c122e)
-- 📊 [Transactions](https://sepolia.etherscan.io/address/0xE235A5C0DbF47ba76db3912c80267F9B43B8d1a8#transactions)
-- 📡 [Events](https://sepolia.etherscan.io/address/0xE235A5C0DbF47ba76db3912c80267F9B43B8d1a8#events)
+- 🔗 [Contract](https://sepolia.etherscan.io/address/0x1AACA0ce21752dE30E0EB927169084b84d290B87)
+- 📊 [Transactions](https://sepolia.etherscan.io/address/0x1AACA0ce21752dE30E0EB927169084b84d290B87#transactions)
+- 📡 [Events](https://sepolia.etherscan.io/address/0x1AACA0ce21752dE30E0EB927169084b84d290B87#events)
 
 **Get Sepolia ETH:**
 - [Sepolia Faucet](https://sepoliafaucet.com/)
 - [Alchemy Faucet](https://sepoliafaucet.com/)
 - [Infura Faucet](https://www.infura.io/faucet/sepolia)
+
+---
+
+## 🎥 Video Demonstration
+
+Watch our **demo.mp4** video to see the complete workflow:
+
+1. **Setup** - Wallet connection and network configuration
+2. **Route Submission** - Encrypting coordinates and submitting to contract
+3. **Processing** - Admin processing encrypted routes
+4. **Results** - Decrypting and viewing optimized routes
+5. **Privacy Features** - How data remains confidential throughout
+
+**Video File**: `demo.mp4` (located in repository root)
 
 ---
 
@@ -548,11 +592,10 @@ npm run test:sepolia
 npm i -g vercel
 
 # Deploy to Vercel
-cd logistics-optimizer
 vercel --prod
 
 # Set environment variables in Vercel dashboard:
-# - NEXT_PUBLIC_CONTRACT_ADDRESS
+# - NEXT_PUBLIC_CONTRACT_ADDRESS=0x1AACA0ce21752dE30E0EB927169084b84d290B87
 # - NEXT_PUBLIC_CHAIN_ID=11155111
 # - NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
 # - NEXT_PUBLIC_RPC_URL
@@ -616,6 +659,8 @@ WALLETCONNECT_PROJECT_ID=...
 COINMARKETCAP_API_KEY=...
 SLACK_WEBHOOK_URL=...
 ```
+
+See **[.github/CICD.md](./.github/CICD.md)** for detailed CI/CD documentation.
 
 ---
 
@@ -795,6 +840,8 @@ The above copyright notice and this permission notice shall be included in all c
 
 ## 🔗 Links
 
+- **GitHub**: [https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE)
+- **Live Demo**: [https://logistics-route-optimizer-fhe.vercel.app/](https://logistics-route-optimizer-fhe.vercel.app/)
 - **Documentation**: [docs.zama.ai/fhevm](https://docs.zama.ai/fhevm)
 - **FHEVM SDK**: [github.com/zama-ai/fhevm](https://github.com/zama-ai/fhevm)
 - **Sepolia Testnet**: [sepolia.dev](https://sepolia.dev/)
@@ -809,7 +856,7 @@ The above copyright notice and this permission notice shall be included in all c
 - 📧 **Email**: support@logistics-optimizer.example
 - 💬 **Discord**: [Join our community](#)
 - 🐦 **Twitter**: [@LogisticsOpt](#)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/logistics-optimizer/issues)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE/issues)
 
 ---
 
