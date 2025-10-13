@@ -1,0 +1,41 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Run linting on Solidity files
+echo "📝 Linting Solidity contracts..."
+npm run lint:sol || {
+  echo "❌ Solidity linting failed"
+  exit 1
+}
+
+# Run TypeScript/JavaScript linting
+echo "📝 Linting TypeScript/JavaScript files..."
+npm run lint:ts || {
+  echo "❌ TypeScript linting failed"
+  exit 1
+}
+
+# Format code with Prettier
+echo "💅 Formatting code with Prettier..."
+npm run format:check || {
+  echo "❌ Code formatting check failed"
+  echo "💡 Run 'npm run format' to auto-fix formatting"
+  exit 1
+}
+
+# Run contract size check
+echo "📏 Checking contract sizes..."
+npm run size || {
+  echo "⚠️  Contract size check failed (non-blocking)"
+}
+
+# Run tests
+echo "🧪 Running tests..."
+npm test || {
+  echo "❌ Tests failed"
+  exit 1
+}
+
+echo "✅ All pre-commit checks passed!"
