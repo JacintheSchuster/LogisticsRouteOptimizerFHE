@@ -1,7 +1,6 @@
 # 🚚 Logistics Route Optimizer
 
-[![CI/CD Pipeline](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE/actions/workflows/ci.yml/badge.svg)](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE/actions/workflows/ci.yml)
-[![Deploy](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE/actions/workflows/deploy.yml/badge.svg)](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE/actions/workflows/deploy.yml)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.24-blue.svg)](https://soliditylang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg)](https://nodejs.org/)
@@ -404,7 +403,6 @@ See **[TESTING.md](./TESTING.md)** for detailed testing documentation.
 
 **Network**: Sepolia Testnet (Chain ID: 11155111)
 **Contract Address**: `0x1AACA0ce21752dE30E0EB927169084b84d290B87`
-**Deployment**: 2025-10-24
 **Frontend**: [https://logistics-route-optimizer-fhe.vercel.app/](https://logistics-route-optimizer-fhe.vercel.app/)
 
 **Etherscan Links:**
