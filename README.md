@@ -9,7 +9,7 @@
 
 > **Privacy-preserving logistics route optimization using Zama FHEVM - Calculate optimal delivery paths while keeping all location data fully encrypted**
 
-🌐 **[Live Demo](https://logistics-route-optimizer-fhe.vercel.app/)** | 📄 **[Documentation](./TECHNICAL.md)** | 🧪 **[Testing Guide](./TESTING.md)** | 🔒 **[Security Guide](./SECURITY_OPTIMIZATION.md)** | 🎥 **[Video Demo](./demo.mp4)**
+🌐 **[Live Demo](https://logistics-route-optimizer-fhe.vercel.app/)** | 📄 **[Documentation](./TECHNICAL.md)** | 🧪 **[Testing Guide](./TESTING.md)** | 🔒 **[Security Guide](./SECURITY_OPTIMIZATION.md)** | 🎥 **[Video Demo demo.mp4]**
 
 **GitHub Repository**: [https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE)
 
