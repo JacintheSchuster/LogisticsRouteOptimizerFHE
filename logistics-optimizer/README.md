@@ -1,101 +1,211 @@
-# Logistics Route Optimizer
+# 🚚 Logistics Route Optimizer - React + FHEVM SDK
 
-Privacy-preserving logistics route optimization using Fully Homomorphic Encryption (FHEVM) on Ethereum Sepolia.
+A production-ready React application demonstrating privacy-preserving logistics route optimization using Zama's FHEVM SDK. Built with React, Vite, TypeScript, and fully integrated with `@zama/fhevm-sdk/react` hooks.
 
-## 🚀 Features
+## 🌟 Core Concepts
 
-- **Next.js 15** with App Router
-- **TypeScript** for type safety
-- **wagmi** for Ethereum interactions
-- **RainbowKit** for wallet connection
-- **Tailwind CSS** + **Radix UI** for styling
-- **Loading states** and error handling
-- **Transaction history** tracking
-- **Vercel** ready deployment
+### FHE-Powered Confidential Route Optimization
+This platform leverages Fully Homomorphic Encryption (FHE) to perform route optimization calculations while keeping all sensitive logistics data encrypted. Delivery coordinates, priorities, vehicle capacities, and optimization results remain confidential throughout the entire computational process.
 
-## 📦 Contract
+### Privacy-Preserving Delivery Path Planning
+Traditional route optimization systems expose sensitive business information such as customer locations, delivery priorities, and operational patterns. Our solution ensures that:
+- **Delivery coordinates remain encrypted** during optimization calculations
+- **Route priorities are kept confidential** from unauthorized parties
+- **Vehicle capacity and constraints** are processed without revealing operational details
+- **Optimized routes are returned encrypted** to maintain end-to-end privacy
 
-- **Address**: `0xE235A5C0DbF47ba76db3912c80267F9B43B8d1a8`
+## 🚀 Key Features
+
+### React + FHEVM SDK Integration
+- **React 18 + Vite**: Modern development stack with fast HMR
+- **FHEVM SDK Hooks**: Full integration with `useFhevm()`, `useEncrypt()`, `useDecrypt()`
+- **TypeScript**: Type-safe development with full autocomplete
+- **Component Architecture**: Modular, maintainable component structure
+
+### Privacy-Preserving Features
+- **Confidential Route Optimization**: Submit encrypted delivery locations and receive optimized routes
+- **Privacy-First Architecture**: All calculations performed on encrypted data using FHE technology
+- **Multi-Constraint Optimization**: Support for vehicle capacity, distance limits, and delivery priorities
+- **Real-time Processing**: Efficient route optimization with encrypted computation
+- **Blockchain Integration**: Immutable record of optimization requests and results
+- **Modern UI**: Responsive design with dynamic gradient backgrounds
+
+## 🔐 Privacy Benefits
+
+- **Data Confidentiality**: Customer locations and delivery details remain private
+- **Competitive Advantage Protection**: Route strategies and operational patterns stay confidential
+- **Regulatory Compliance**: Enhanced privacy protection for sensitive logistics data
+- **Zero-Knowledge Optimization**: Route calculations without revealing underlying data
+
+## 📱 Application Scenarios
+
+- **Last-Mile Delivery**: Optimize delivery routes while protecting customer privacy
+- **Supply Chain Management**: Confidential warehouse-to-retailer logistics planning
+- **Emergency Services**: Private route optimization for sensitive emergency responses
+- **Corporate Logistics**: Protect proprietary delivery strategies and customer data
+
+## 🛠 Technical Architecture
+
+### Technology Stack
+- **Frontend**: React 18 + Vite
+- **SDK**: @zama/fhevm-sdk (React hooks)
+- **Blockchain**: Ethers.js v6
+- **Language**: TypeScript
+- **Styling**: CSS with CSS variables
+- **Smart Contracts**: Solidity contracts with FHE operations
+- **Encryption**: Fully Homomorphic Encryption for confidential computation
 - **Network**: Sepolia Testnet
-- **Explorer**: [View on Etherscan](https://sepolia.etherscan.io/address/0xE235A5C0DbF47ba76db3912c80267F9B43B8d1a8)
 
-## 🛠️ Installation
+### Component Structure
 
-\`\`\`bash
+```
+src/
+├── components/
+│   ├── LogisticsOptimizer.tsx    # Main application component
+│   ├── WalletConnection.tsx      # MetaMask wallet connection
+│   ├── RouteRequestForm.tsx      # Route optimization request form
+│   ├── RouteList.tsx             # Display user routes
+│   └── RouteDetails.tsx          # Route visualization
+├── App.tsx                       # Root component with FhevmProvider
+├── main.tsx                      # React entry point
+├── App.css                       # Application styles
+└── index.css                     # Global styles
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- MetaMask browser extension
+- Sepolia testnet ETH
+
+### Installation
+
+```bash
+# Navigate to the project
+cd examples/logistics-optimizer
+
 # Install dependencies
 npm install
 
-# Copy environment variables
-cp .env.example .env.local
-
-# Add your WalletConnect Project ID to .env.local
-\`\`\`
-
-## 🏃 Development
-
-\`\`\`bash
 # Start development server
 npm run dev
+```
 
-# Build for production
+The app will be available at `http://localhost:3000`
+
+### Building for Production
+
+```bash
+# Build the application
 npm run build
 
-# Start production server
-npm start
+# Preview production build
+npm run preview
+```
 
-# Type check
-npm run type-check
+## 📚 FHEVM SDK Integration
 
-# Lint
-npm run lint
-\`\`\`
+### 1. Provider Setup
 
-## 📁 Project Structure
+```typescript
+// src/App.tsx
+import { FhevmProvider } from '@zama/fhevm-sdk/react';
 
-\`\`\`
-logistics-optimizer/
-├── app/                    # Next.js app router
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Home page
-│   ├── providers.tsx      # Web3 providers
-│   └── globals.css        # Global styles
-├── components/            # React components
-│   ├── ui/               # UI components (Radix)
-│   ├── RouteForm.tsx     # Route optimization form
-│   ├── RouteList.tsx     # User routes display
-│   └── TransactionHistory.tsx # TX history
-├── lib/                   # Utilities
-│   ├── wagmi.ts          # wagmi configuration
-│   ├── contract.ts       # Contract ABI & address
-│   └── utils.ts          # Helper functions
-└── public/               # Static files
-\`\`\`
+function App() {
+  return (
+    <FhevmProvider chainId={11155111}>
+      <LogisticsOptimizer />
+    </FhevmProvider>
+  );
+}
+```
 
-## 🌐 Deployment
+### 2. Using FHEVM Hooks
 
-### Vercel (Recommended)
+```typescript
+// src/components/LogisticsOptimizer.tsx
+import { useFhevm, useEncrypt, useDecrypt } from '@zama/fhevm-sdk/react';
 
-1. Push to GitHub
-2. Import project in Vercel
-3. Add environment variables
-4. Deploy
+export const LogisticsOptimizer: React.FC = () => {
+  // Check if FHEVM is ready
+  const { isReady, error } = useFhevm();
 
-\`\`\`bash
-# Or use Vercel CLI
-npm i -g vercel
-vercel
-\`\`\`
+  // Encryption hooks
+  const { encrypt32, encrypt8, isEncrypting } = useEncrypt();
 
-## 🔐 Environment Variables
+  // Decryption hooks
+  const { decrypt64, isDecrypting } = useDecrypt();
 
-Required in `.env.local`:
+  // Use in your application logic
+  const submitRoute = async () => {
+    const encrypted = await encrypt32(1000);
+    // Use encrypted value in contract call
+  };
+};
+```
 
-\`\`\`env
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id
-\`\`\`
+### 3. Available Hooks
 
-Get your Project ID from [WalletConnect Cloud](https://cloud.walletconnect.com/)
+#### `useFhevm()`
+Returns FHEVM SDK status and configuration
+
+#### `useEncrypt()`
+Provides encryption functions for different data types
+
+#### `useDecrypt()`
+Provides decryption functions for encrypted results
+
+## 🌐 Live Demo
+
+**Website**: [https://logistics-route-optimizer.vercel.app/](https://logistics-route-optimizer.vercel.app/)
+
+**Contract Address**: `0x1AACA0ce21752dE30E0EB927169084b84d290B87`
+
+## 📹 Demo Materials
+
+### LogisticsRouteOptimizer.mp4
+Our platform includes comprehensive video demonstrations showing:
+- Route optimization request workflow
+- Privacy-preserving calculation process
+- Encrypted result retrieval and visualization
+- Administrative route processing features
+
+### LogisticsRouteOptimizer.png
+The repository contains detailed screenshots of:
+- Smart contract deployment transactions
+- Route optimization request transactions
+- Route processing and result generation
+- Encrypted data handling on blockchain
+
+## 💡 How It Works
+
+1. **Submit Route Request**: Input delivery locations, priorities, and constraints through the encrypted interface
+2. **FHE Processing**: The system performs route optimization calculations on encrypted data
+3. **Receive Results**: Get optimized routes and timing estimates while maintaining data privacy
+4. **Execute Delivery**: Use the optimized route for efficient, private logistics operations
+
+## 🔗 Repository
+
+**GitHub**: [https://github.com/JacintheSchuster/LogisticsRouteOptimizer](https://github.com/JacintheSchuster/LogisticsRouteOptimizer)
+
+## 🏆 Innovation Impact
+
+This project represents a significant advancement in logistics technology by combining:
+- **Cutting-edge FHE technology** for practical logistics applications
+- **Real-world privacy needs** in competitive logistics markets
+- **Blockchain immutability** with confidential computation
+- **User-friendly interfaces** for mainstream adoption
 
 ## 📄 License
 
-MIT
+MIT License - See LICENSE file for details
+
+## 🤝 Contributing
+
+We welcome contributions to enhance the privacy-preserving logistics optimization ecosystem. Please refer to our contribution guidelines in the repository.
+
+---
+
+*Revolutionizing logistics through privacy-preserving route optimization technology*

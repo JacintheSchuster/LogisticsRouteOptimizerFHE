@@ -5,13 +5,15 @@
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.24-blue.svg)](https://soliditylang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg)](https://nodejs.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-15.x-black.svg)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF.svg)](https://vitejs.dev/)
 [![FHEVM](https://img.shields.io/badge/FHEVM-Zama-purple.svg)](https://docs.zama.ai/fhevm)
 
 > **Privacy-preserving logistics route optimization using Zama FHEVM - Calculate optimal delivery paths while keeping all location data fully encrypted**
 
 🌐 **[Live Demo](https://logistics-route-optimizer-fhe.vercel.app/)** | 📄 **[Documentation](./TECHNICAL.md)** | 🧪 **[Testing Guide](./TESTING.md)** | 🔒 **[Security Guide](./SECURITY_OPTIMIZATION.md)** | 🎥 **[Video Demo demo.mp4]**
 
-**GitHub Repository**: [https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE](https://github.com/JacintheSchuster/LogisticsRouteOptimizerFHE)
+ 
 
 Built for the **Zama FHE Challenge** - demonstrating practical privacy-preserving applications for real-world logistics.
 
@@ -48,18 +50,26 @@ User Input (Plain) → Encrypt Client-Side → Smart Contract (Encrypted)
 
 ## ✨ Features
 
+### Core Functionality
 - 🔐 **Fully Encrypted Route Data** - Delivery coordinates, priorities, and vehicle constraints remain encrypted during optimization
 - 🧮 **Homomorphic Optimization** - Calculate optimal routes on encrypted data without decryption
 - 🚀 **Real-time Processing** - Efficient FHE operations with async gateway decryption
 - 🛡️ **Multi-layer Security** - Access control, pausable contracts, and input proof verification
 - 📊 **Immutable Audit Trail** - Blockchain-based tracking of all optimization requests and results
-- 🌐 **User-friendly Interface** - Modern Next.js 15 frontend with RainbowKit wallet integration
 - ⚡ **Gas Optimized** - Custom errors, packed storage, and compiler optimization
 - 🧪 **Thoroughly Tested** - 48+ test cases with 95%+ coverage
+
+### Multiple Frontend Implementations
+- 🌐 **Next.js 15 App** - Production-ready app with App Router, Tailwind CSS, and glassmorphism UI
+- ⚛️ **React + Vite Example** - Lightweight alternative using official `@zama/fhevm-sdk` with React hooks
+- 🎣 **Modern Development** - Choose between Next.js for full-featured apps or Vite for fast prototyping
+- 📦 **Flexible Integration** - Multiple approaches to integrate FHEVM (fhevmjs or @zama/fhevm-sdk)
 
 ---
 
 ## 🏗️ Architecture
+
+### Main Application (Next.js)
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -86,6 +96,28 @@ User Input (Plain) → Encrypt Client-Side → Smart Contract (Encrypted)
 │  • Encrypted computation layer                          │
 │  • Async decryption with oracle integration            │
 │  • Sepolia testnet deployment                           │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Alternative: React + Vite Example (logistics-optimizer)
+
+```
+┌─────────────────────────────────────────────────────────┐
+│           Frontend (React 18 + Vite + FHEVM SDK)        │
+├─────────────────────────────────────────────────────────┤
+│  • FhevmProvider for context management                │
+│  • useFhevm(), useEncrypt(), useDecrypt() hooks        │
+│  • Ethers.js + RainbowKit + wagmi integration          │
+│  • TypeScript with full type safety                    │
+│  • Fast HMR with Vite dev server                       │
+└─────────────────────────────────────────────────────────┘
+                          ↓ Encrypted Inputs
+┌─────────────────────────────────────────────────────────┐
+│      Same Smart Contract (Shared Backend Logic)         │
+├─────────────────────────────────────────────────────────┤
+│  • Both frontends use the same smart contract          │
+│  • Demonstrates flexible integration approaches        │
+│  • Shows FHEVM SDK vs fhevmjs comparison               │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -160,6 +192,47 @@ npm run dev
 # Application will be available at http://localhost:3000
 ```
 
+### Run Example Applications
+
+The project includes additional example implementations demonstrating different frontend approaches:
+
+#### React + Vite Example (logistics-optimizer)
+
+A lightweight implementation using React 18, Vite, and the official `@zama/fhevm-sdk`:
+
+```bash
+# Navigate to the example
+cd logistics-optimizer
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Application will be available at http://localhost:3000
+
+# Build for production
+npm run build
+npm run preview
+```
+
+**Features:**
+- 🚀 **Fast Development**: Vite's instant HMR and optimized build
+- 🎣 **FHEVM SDK Hooks**: Direct integration with `useFhevm()`, `useEncrypt()`, `useDecrypt()`
+- 📦 **Lightweight**: Minimal dependencies, faster build times
+- 🔧 **TypeScript**: Full type safety with modern tooling
+- 🎨 **Modular Architecture**: Reusable component structure
+
+**Tech Stack:**
+- React 18.2.0 + Vite 5.x
+- @zama/fhevm-sdk with React hooks
+- TypeScript 5.0
+- Ethers.js 6.9.0
+- RainbowKit 2.0 + wagmi 2.0
+
+**Use Case:** Ideal for developers who want a simpler, faster development experience with the official FHEVM SDK.
+
 ---
 
 ## 🔧 Technical Implementation
@@ -231,6 +304,69 @@ await contract.submitRoute(
   encryptedPriority
 );
 ```
+
+**Alternative: React + FHEVM SDK Integration** (logistics-optimizer example)
+
+The project also includes a React + Vite implementation using the official `@zama/fhevm-sdk`:
+
+```typescript
+// src/App.tsx - Provider setup
+import { FhevmProvider } from '@zama/fhevm-sdk/react';
+
+function App() {
+  return (
+    <FhevmProvider chainId={11155111}>
+      <LogisticsOptimizer />
+    </FhevmProvider>
+  );
+}
+```
+
+```typescript
+// src/components/LogisticsOptimizer.tsx - Using SDK hooks
+import { useFhevm, useEncrypt, useDecrypt } from '@zama/fhevm-sdk/react';
+
+export const LogisticsOptimizer: React.FC = () => {
+  // Check if FHEVM is ready
+  const { isReady, error } = useFhevm();
+
+  // Encryption hooks
+  const { encrypt32, encrypt8, isEncrypting } = useEncrypt();
+
+  // Decryption hooks
+  const { decrypt64, isDecrypting } = useDecrypt();
+
+  // Submit encrypted route
+  const submitRoute = async (startX: number, startY: number, endX: number, endY: number, priority: number) => {
+    // Encrypt inputs using SDK hooks
+    const encStartX = await encrypt32(startX);
+    const encStartY = await encrypt32(startY);
+    const encEndX = await encrypt32(endX);
+    const encEndY = await encrypt32(endY);
+    const encPriority = await encrypt8(priority);
+
+    // Submit to contract
+    await contract.submitRoute(
+      encStartX, encStartY, encEndX, encEndY, encPriority
+    );
+  };
+
+  // Decrypt results
+  const getRouteResults = async (routeId: number) => {
+    const route = await contract.getUserRoute(address, routeId);
+    const distance = await decrypt64(route.encOptimizedDistance);
+    return distance;
+  };
+};
+```
+
+**Key Benefits of FHEVM SDK Approach:**
+- ✅ **Simplified API**: Built-in React hooks for encryption/decryption
+- ✅ **Automatic State Management**: Loading states and error handling
+- ✅ **Type Safety**: Full TypeScript support with autocomplete
+- ✅ **Provider Pattern**: Easy initialization with `FhevmProvider`
+- ✅ **Optimized Performance**: Built-in caching and optimization
+- ✅ **Official Support**: Maintained by Zama team
 
 ---
 
@@ -446,6 +582,8 @@ Watch our **demo.mp4** video to see the complete workflow:
 
 ### Frontend
 
+#### Next.js Implementation (Main App)
+
 | Technology | Version | Purpose |
 |------------|---------|---------|
 | **Next.js** | 15.x | React framework with App Router |
@@ -455,6 +593,19 @@ Watch our **demo.mp4** video to see the complete workflow:
 | **wagmi** | 2.13.0 | React hooks for Ethereum |
 | **Tailwind CSS** | 3.4.0 | Utility-first CSS |
 | **fhevmjs** | 0.6.0 | Client-side FHE encryption |
+
+#### React + Vite Implementation (Examples)
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **React** | 18.2.0 | UI library |
+| **Vite** | 5.x | Fast build tool and dev server |
+| **TypeScript** | 5.0.0 | Type safety |
+| **@zama/fhevm-sdk** | latest | Official FHEVM SDK with React hooks |
+| **Ethers.js** | 6.9.0 | Ethereum library |
+| **RainbowKit** | 2.0.0 | Wallet connection UI |
+| **wagmi** | 2.0.0 | React hooks for Ethereum |
+| **Viem** | 2.0.0 | TypeScript Ethereum library |
 
 ### Development Tools
 
@@ -671,7 +822,36 @@ See **[.github/CICD.md](./.github/CICD.md)** for detailed CI/CD documentation.
 | **[TESTING.md](./TESTING.md)** | Testing guide with 48+ test cases |
 | **[SECURITY_OPTIMIZATION.md](./SECURITY_OPTIMIZATION.md)** | Security and performance guide |
 | **[.github/CICD.md](./.github/CICD.md)** | CI/CD setup and configuration |
+| **[logistics-optimizer/README.md](./logistics-optimizer/README.md)** | React + Vite example with FHEVM SDK |
 | **[.env.example](./.env.example)** | Environment variables template |
+
+## 📁 Project Structure
+
+```
+logistics-optimizer/
+├── contracts/                  # Smart contracts (Solidity)
+│   └── LogisticsRouteOptimizer.sol
+├── frontend/                   # Main Next.js application
+│   ├── app/                   # Next.js 15 App Router
+│   ├── components/            # React components
+│   └── lib/                   # Utilities and helpers
+├── logistics-optimizer/        # React + Vite example
+│   ├── src/
+│   │   ├── components/        # React components
+│   │   │   ├── LogisticsOptimizer.tsx
+│   │   │   ├── WalletConnection.tsx
+│   │   │   ├── RouteRequestForm.tsx
+│   │   │   ├── RouteList.tsx
+│   │   │   └── RouteDetails.tsx
+│   │   ├── App.tsx            # Root component with FhevmProvider
+│   │   └── main.tsx           # Entry point
+│   ├── package.json           # Dependencies with @zama/fhevm-sdk
+│   ├── vite.config.ts         # Vite configuration
+│   └── tsconfig.json          # TypeScript configuration
+├── test/                       # Comprehensive test suite
+├── scripts/                    # Deployment and interaction scripts
+└── docs/                       # Additional documentation
+```
 
 ---
 
